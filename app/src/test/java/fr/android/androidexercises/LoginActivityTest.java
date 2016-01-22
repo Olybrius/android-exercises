@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.shadows.ShadowToast;
 
 /**
  * Created by Joris on 22/01/2016.
@@ -36,5 +37,16 @@ public class LoginActivityTest {
         // Then
         Assertions.assertThat(activity.loginLayout).isVisible();
         Assertions.assertThat(activity.loggedText).isGone();
+    }
+
+    @Test
+    public void testMessage() throws Exception
+    {
+        // Given
+        // When
+       activity.message(R.string.action_login);
+        // Then
+        String textToast = ShadowToast.getTextOfLatestToast();
+        org.assertj.core.api.Assertions.assertThat(textToast).isEqualTo("log me in");
     }
 }
