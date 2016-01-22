@@ -1,5 +1,6 @@
 package fr.android.androidexercises;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,12 +12,51 @@ import android.widget.TextView;
 
 public class Step1Fragment extends Fragment {
 
+    private static final String step1 = "This is step 1!";
+
+    private TextView textView;
+    private Button nextButton;
+    private OnNextStep1Listener listener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // TODO cast context to listener
+        listener = (OnNextStep1Listener) context;
+
+    }
+
     // TODO Override onCreateViewMethod
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_step1, container, false);
+        textView = (TextView) view.findViewById(R.id.textView);
+        // TODO findViewById nextButton (Button)
+        nextButton = (Button) view.findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO call onNext() from listener
+                listener.onNextStep1();
+
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // TODO setText(step1)
+        textView.setText(step1);
+    }
+
+    public interface OnNextStep1Listener {
+
+        // TODO add onNext() method
+        public void onNextStep1();
+
     }
 
 }

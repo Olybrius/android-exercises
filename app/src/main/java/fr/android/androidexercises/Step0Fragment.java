@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class Step0Fragment extends Fragment {
 
-    private static final String step0 = "This is step 0";
+    private static final String step0 = "This is step 0!";
 
     private TextView textView;
     private Button nextButton;
